@@ -8,15 +8,22 @@ To preserve the privacy of the clerks, the participating clerks are not identifi
 
 ### **Class CNet**
 
-default constructor
+-default constructor
+
     initializes an empty instance.
-add ( y, y, cost )
+
+- add ( y, y, cost )
+
     method adds a pair of cooperating clerks x and y, the cost to pay for the cooperation is cost. Return value is a reference to the CNet instance (fluent interface).
-optimize ()
+
+- optimize ()
+
     the method is called after the last invocation of add but before the first invocation of totalCost. Use the method to pre-calculate some internal structures that speed up the further calls to totalCost. Return value is a reference to the CNet instance (fluent interface).
-totalCost(x,y)
+
+- totalCost(x,y)
+
     the method computes the total cost needed to pay such that our request is passed from clerk x to clerk y. The computed cost is returned as an integer. If the connection does not exist (an unknown clerk), the return value is -1.
-T_
+
+- T_
+
     a generic parameter of the class, the clerks are represented by this type. The type may provide only a very basic interface: copying, moving, destruction, and equality/inequality comparison (==, !=). Other operations may exist, however, they are not guaranteed. An example of such minimalist type is class CDumbString in the attached archive.
-
-
