@@ -37,11 +37,11 @@ The required class CRegister has the following interface:
 
     The method returns success(true) or error (false). An error is returned if the same person (same id) already exists in the register.
 
-resettle(id,date,street,city)
+- resettle(id,date,street,city)
 
     method adds a new domicile into the person's record. The parameters are the same as in the case of add. The method returns true to indicate success or false for a failure. There are two reasons for the failure: either there is no person with the given id in the register or there has already been a domicile change on that day for the given person (in other words, a person may change its domicile at most once a day). Caution: The changes of domicile may be processed in any order, i.e. the date does not have to form an increasing sequence.
 
-print(stream,id)
+- print(stream,id)
 
     the method displays the domicile record for the given person identified by id into the given stream stream. The method returns true to indicate success or false to report error (there is no person with given id in the register). The output format is shown in sample runs. Please note the domiciles are listed such that the dates form an ascending sequence.
 
