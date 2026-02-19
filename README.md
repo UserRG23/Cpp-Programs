@@ -18,11 +18,10 @@ Each directory represents a specific task. You will find:
 
 ### Getting Started 
 
-To compile and run the tasks, ensure you have `g++` and `make` installed. Use the following commands from within a task directory:
+To compile and run the tasks, ensure you have `gdb`, `g++` and `make` installed. Use the following commands from within a task directory:
 
 | Command      | Action |
 | ------------ | ------ |
 | `make build` | Compiles the code and places the binary in the `bin/` directory. |
 | `make run`   | Compiles the code and executes it immediately. |
-| `make debug` | Compiles the code and launches gdb for debugging. |
-
+| `make debug` | Compiles the code and launches `gdb` for debugging. |
