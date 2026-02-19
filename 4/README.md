@@ -9,8 +9,11 @@ month day year hour:minute:sec relay_name mailID: message
 for instance:
 
 > Mar 29 2025 14:55:31.456 relay.fit.cvut.cz KhdfEjkl247D: from=PR-department@fit.cvut.cz
+>
 > Mar 29 2025 14:50:23.233 relay.fit.cvut.cz ADFger72343D: mail undeliverable
+>
 > Mar 29 2025 14:58:32.563 relay.fit.cvut.cz KhdfEjkl247D: subject=Meeting this afternoon
+>
 > Mar 29 2025 15:04:18.345 relay.fit.cvut.cz KhdfEjkl247D: to=CEO@fit.cvut.cz
 
 The fields are self-explanatory: month (English notation, 3 letter acronym, first in capital), day of month, year, hour, minute, second (with milliseconds), mail server DNS name, e-mail identifier (letters and digits) and a message. The mail server produces a message every time something important happens (e.g., an email is received from a client, an email is delivered to the mailbox, ...). It is common for one email to generate several log messages, however, the messages share the same mail identifier.
