@@ -13,11 +13,11 @@ overloaded operator=
 operator <<
     will output a textual form of the polynomial into an output stream. The output formatting must follow these rules:
 
-       - the polynomial will be displayed in a decreasing order of powers, i.e. from the highest power of x,
-       - terms with zero coefficient are not displayed in the output,
-       - terms with coefficient +1 and -1 are displayed without the coefficient (just a power of x),
-       - there are not unnecessary - in the output (i.e. x - 9 or - x^2 + 4 is OK, whereas x + (-9) is not),
-       - zero polynomial will be displayed as 0.
+- the polynomial will be displayed in a decreasing order of powers, i.e. from the highest power of x,
+- terms with zero coefficient are not displayed in the output,
+- terms with coefficient +1 and -1 are displayed without the coefficient (just a power of x),
+- there are not unnecessary - in the output (i.e. x - 9 or - x^2 + 4 is OK, whereas x + (-9) is not),
+- zero polynomial will be displayed as 0.
 
 operator *
     multiplies given polynomial either with a double, or with another polynomial,
