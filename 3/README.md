@@ -8,32 +8,32 @@ The aim is to practice and understand the difference between shallow and deep co
 
 The required class CRegister has the following interface:
 
-default constructor
+- default constructor
 
     creates an empty instance - an empty register,
 
-copy constructor
+- copy constructor
 
     creates a deep copy of the source instance. Implement it only if the automatically generated copy constructor does not work properly (seriously, you will have to implement it),
 
-destructor
+- destructor
 
     frees the resources allocated by the instance
 
-operator =
+- operator =
 
     to deep-copy data between instances,
 
-add(id,name,surname,date,street,city)
+- add(id,name,surname,date,street,city)
 
     this method adds a new citizen into the register. The parameters are:
 
-    - id is an unique identifier assigned to the person. You may assume it is always in the form "XXXXXX/YYYY",
-    - name is a name, arbitrary length, any characters,
-    - surname is a surname, arbitrary length, any characters,
-    - date is a date, the start of the domicile, a string. You may assume it is a valid date in the format "YYYY-MM-DD",
-    - street address, arbitrary length, any characters,
-    - city address, arbitrary length, any characters.
+    * id is an unique identifier assigned to the person. You may assume it is always in the form "XXXXXX/YYYY",
+    * name is a name, arbitrary length, any characters,
+    * surname is a surname, arbitrary length, any characters,
+    * date is a date, the start of the domicile, a string. You may assume it is a valid date in the format "YYYY-MM-DD",
+    * street address, arbitrary length, any characters,
+    * city address, arbitrary length, any characters.
 
     The method returns success(true) or error (false). An error is returned if the same person (same id) already exists in the register.
 
