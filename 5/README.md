@@ -15,24 +15,35 @@ For the sake of simplicity, we assume all addresses 32 bits in size, we assume o
 Object file structure:
 
 > offset  size   meaning
+>
 > 0000    4B     number of entries in the exports table
+>
 > 0004    4B     number of entries in the imports table
+>
 > 0008    4B     total size of the machine code block (in bytes)
+>
 > 000C    ?      exports table, # of entries in given by the integer at offset 0
+>
 > ????    ?      imports table, # of entries in given by the integer at offset 4
+>
 > ????    ?      machine code block, total length is given by the integer at offset 8
 
 An entry in the exports table:
 
 > +0000   1B     function name length
+>
 > +0001   ?      function name
+>
 > +????   4B     position of the function, counted in bytes from the beginning of the machine code block
 
 An entry in the imports table:
 
 > +0000   1B     function name length
+>
 > +0001   ?      function name
+>
 > +????   4B     N, the # of times the function is used (called) in the machine code block
+>
 > +????   N * 4B the positions where the function is used, counted in bytes from the beginning of the machine code block
 
 Example:
@@ -41,19 +52,28 @@ An input object file may consist the following bytes:
 > 0000    03 00 00 00  02 00 00 00  30 00 00 00               // 3 exports, 2 imports, total of 48 = 0x30 bytes in the machine code block
 > 
 > 000C    03 66 6f 6f  08 00 00 00                            // 1. export, function foo, offset 8 in the machine code block
+>
 > 0014    02 61 61 00  00 00 00                               // 2. export, function aa, offset 0 in the machine code block
+>
 > 001B    01 58 18 00  00 00                                  // 3. export, function X, offset 24 = 0x18 in the machine code block
 > 
 > 0021    02 61 61 01  00 00 00 1A  00 00 00                  // 1. import, function aa is called 1x at position 0x1A
+>
 > 002C    03 66 6f 6f  02 00 00 00  27 00 00 00  09 00 00 00  // 2. import, function foo is called 2x at positions 0x27 and 0x9
 > 
 > 003C    01 02 03 04  05 06 07 08                            // function aa, implementation
+>
 > 0044    21 62 33 64  32 46 15 38  39 7A 34 34  12 1D 2F 48  // function foo, implementation. Bytes 62 33 64 32 will be replaced
+>
 >                                                             // by the address of foo (offset 0x9 in the imports table)
+>
 > 0054    5D 2C 47 15  2E 4F 83 A7  C5 EE 2B 47  56 61 2D 38  // function X, implementation. Bytes 47 15 2E 4F will be replaced
+>
 > 0064    3B 48 51 17  63 90 5A 3C                            // by the address of aa (offset 0x1A in the imports table),
+>
 >                                                             // bytes 38 3B 48 51 will be replaced the address of foo (offset 0x27
-                                                            // in the imports table)
+>
+>                                                            // in the imports table)
 
 When passed to the linker with entry point function aa, the resulting file will be 8 bytes long. Only function aa will be copied, the implementation will remain unchanged (no function called from within aa):
 
@@ -62,8 +82,9 @@ When passed to the linker with entry point function aa, the resulting file will 
 If function X is the entry point, the resulting file must contain functionsX, foo, and aa. Moreover, the addresses must be updated:
 
 > 0000    5D 2C 18 00  00 00 83 A7  C5 EE 2B 47  56 61 2D 20  // implementation of X, bytes 18 00 00 00 form the address of
+>
 > 0010    00 00 00 17  63 90 5A 3C                            // function aa, bytes 20 00 00 00 form the address of foo
-> 
+>
 > 0018    01 02 03 04  05 06 07 08                            // function aa, no modifications
 > 
 > 0020    21 20 00 00  00 46 15 38  39 7A 34 34  12 1D 2F 48  // function foo, bytes 20 00 00 00 form the address of foo
@@ -72,11 +93,19 @@ If function X is the entry point, the resulting file must contain functionsX, fo
 
 The required class CLinker has the following interface:
 
-default constructor and destructor
+- default constructor and destructor
+
     in the usual meaning
-copy constructor and operator =
+
+- copy constructor and operator =
+
     not used in this assignment, may be suppressed (=delete).
-addFile(objFileName)
+
+- addFile(objFileName)
+
     adds a new object file to the linker. Parameter is the name of the object file. The method may read the file, or it may just save the file name and read the file contents later. If you read the object files in this method and the reading fails, throw std::runtime_error, see below.
-linkOutput ( outFileName, entryPoint )
+
+
+- linkOutput ( outFileName, entryPoint )
+
     the method creates the output file outFileName. The second parameter is the name of the entry point function (i.e., the equivalent of "main"). The method does not return anything. Exception std::runtime_error is thrown if the linking fails (missing/duplicate symbol, I/O error, ...). The description of the exception may contain the reason of the error (this may be helpful when debugging). However, the description of the exception is not checked by the testing environment. 
