@@ -8,7 +8,7 @@ To preserve the privacy of the clerks, the participating clerks are not identifi
 
 ### **Class CNet**
 
--default constructor
+- default constructor
 
     initializes an empty instance.
 
